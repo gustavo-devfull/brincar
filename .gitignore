@@ -1,0 +1,5 @@
+.thumbnail
+*.zip
+
+# Vercel local project metadata
+.vercel
