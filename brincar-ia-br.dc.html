@@ -352,30 +352,45 @@ ready((root) => {
     animate($("path[stroke-width='15']", art), { opacity: [0, 1] }, { delay: stagger(0.2, { startDelay: 0.5 }), duration: 0.6 });
   }
 
-  // Faixa de números: contagem + entrada
+  // Revelar ao entrar e sumir ao sair da tela (vale na descida e na subida)
+  const EASE = [0.22, 1, 0.36, 1];
+  const reveal = (targets, { amount = 0.25, distance = 40, gap = 0.08, extra, host: hostEl } = {}) => {
+    const els = [].concat(targets);
+    els.forEach((el) => { el.style.opacity = 0; });
+    const host = hostEl ?? els[0];
+    inView(host, () => {
+      animate(els, { opacity: 1, y: 0 }, { delay: stagger(gap), duration: 0.7, ease: EASE });
+      extra?.in?.();
+      return () => {
+        const above = host.getBoundingClientRect().top < 0;
+        animate(els, { opacity: 0, y: above ? -distance : distance }, { duration: 0.45, ease: "easeIn" });
+        extra?.out?.();
+      };
+    }, { amount });
+    els.forEach((el) => animate(el, { y: distance }, { duration: 0 }));
+  };
+
+  // Faixa de números
   const stats = sections[1];
-  inView(stats, () => {
-    animate($(":scope > div", stats), { opacity: [0, 1], y: [24, 0] }, { delay: stagger(0.1), duration: 0.6, ease: "easeOut" });
-    const n = $(":scope > div > div:first-child", stats)[0];
-    if (n && /^\d+$/.test(n.textContent.trim())) animate(0, +n.textContent, { duration: 1.2, ease: "easeOut", onUpdate: (v) => (n.textContent = Math.round(v)) });
-  }, { amount: 0.5 });
+  const statCells = $(":scope > div", stats);
+  const n = $(":scope > div > div:first-child", stats)[0];
+  const nTarget = n && /^\d+$/.test(n.textContent.trim()) ? +n.textContent : null;
+  reveal(statCells, {
+    amount: 0.5, gap: 0.1, distance: 28, host: stats,
+    extra: { in: () => nTarget !== null && animate(0, nTarget, { duration: 1.2, ease: "easeOut", onUpdate: (v) => (n.textContent = Math.round(v)) }) },
+  });
 
-  // Cards de argumentos e demais seções
+  // Seções de argumentos e demais
   sections.slice(2, -1).forEach((sec) => {
-    const head = $(":scope > div > div, :scope > div > h2", sec);
-    head.forEach((el) => (el.style.opacity = 0));
-    inView(sec, () => {
-      animate(head, { opacity: [0, 1], y: [24, 0] }, { delay: stagger(0.08), duration: 0.6, ease: "easeOut" });
-    }, { amount: 0.15 });
+    const head = $(":scope > div > div:not([style*='display: grid']), :scope > div > h2", sec);
+    if (head.length) reveal(head, { amount: 0.3, distance: 30 });
 
-    const cards = $("div[style*='border-top']", sec);
-    cards.forEach((c) => (c.style.opacity = 0));
-    cards.forEach((card) => {
-      inView(card, () => {
-        animate(card, { opacity: [0, 1], y: [40, 0] }, { duration: 0.7, ease: [0.22, 1, 0.36, 1] });
-        const svg = card.querySelector("svg");
-        if (svg) animate(svg, { scale: [0.6, 1], rotate: [-8, 0] }, { delay: 0.15, type: "spring", stiffness: 220, damping: 12 });
-      }, { amount: 0.25 });
+    $("div[style*='border-top']", sec).forEach((card) => {
+      const svg = card.querySelector("svg");
+      reveal(card, {
+        amount: 0.3, distance: 50,
+        extra: { in: () => svg && animate(svg, { scale: [0.6, 1], rotate: [-8, 0] }, { delay: 0.15, type: "spring", stiffness: 220, damping: 12 }) },
+      });
       hover(card, () => {
         animate(card, { y: -6 }, { type: "spring", stiffness: 300, damping: 20 });
         return () => animate(card, { y: 0 }, { type: "spring", stiffness: 300, damping: 20 });
@@ -385,14 +400,21 @@ ready((root) => {
 
   // Seção CTA vermelha
   const cta = sections[sections.length - 1];
-  const ctaSvg = cta?.querySelector("svg");
+  const ctaSvg = cta && [...cta.querySelectorAll("svg")].pop();
+  const ctaText = cta?.querySelector("h2")?.parentElement;
+  if (ctaText) reveal([...ctaText.children], { amount: 0.3, distance: 30 });
   if (ctaSvg) {
     ctaSvg.style.opacity = 0;
     inView(cta, () => {
-      animate(ctaSvg, { opacity: [0, 1], x: [60, 0] }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
+      animate(ctaSvg, { opacity: 1, x: 0 }, { duration: 0.8, ease: EASE });
       animate($("rect, circle", ctaSvg), { scale: [0.6, 1] }, { delay: stagger(0.08, { startDelay: 0.3 }), type: "spring", stiffness: 260, damping: 14 });
+      return () => animate(ctaSvg, { opacity: 0, x: 60 }, { duration: 0.45, ease: "easeIn" });
     }, { amount: 0.3 });
+    animate(ctaSvg, { x: 60 }, { duration: 0 });
   }
+
+  // Hero: ao rolar para baixo o texto e a ilustração se afastam e esmaecem
+  scroll(animate(heroText, { opacity: [1, 0], y: [0, -60] }, { ease: "linear" }), { target: hero, offset: ["35% start", "end start"] });
 
   // Botões: mola ao passar o mouse / clicar
   $("a[href^='https://wa.me']").forEach((a) => {
