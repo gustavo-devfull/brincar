@@ -316,5 +316,102 @@ class Component extends DCLogic {
   }
 }
 </script>
+
+<script type="module">
+import { animate, inView, stagger, scroll, hover } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function ready(fn) {
+  const t = setInterval(() => {
+    if (document.querySelector("#dc-root h1")) { clearInterval(t); fn(document.getElementById("dc-root")); }
+  }, 50);
+  setTimeout(() => clearInterval(t), 10000);
+}
+
+ready((root) => {
+  if (reduce) return;
+  const $ = (s, c = root) => [...c.querySelectorAll(s)];
+  const sections = $("section");
+  const hero = sections[0];
+
+  // Header
+  animate($("header")[0], { opacity: [0, 1], y: [-16, 0] }, { duration: 0.6, ease: "easeOut" });
+
+  // Hero: tags, título, texto, botões
+  const heroText = hero.firstElementChild.firstElementChild;
+  const items = [...heroText.children];
+  items.forEach((el) => (el.style.opacity = 0));
+  animate(items, { opacity: [0, 1], y: [28, 0] }, { delay: stagger(0.1, { startDelay: 0.2 }), duration: 0.7, ease: [0.22, 1, 0.36, 1] });
+
+  // Ilustração do hero: entrada com mola + blocos caindo
+  const art = hero.querySelector("svg");
+  if (art) {
+    animate(art, { opacity: [0, 1], scale: [0.92, 1] }, { delay: 0.3, type: "spring", stiffness: 120, damping: 16 });
+    animate($("rect", art), { y: [-40, 0], opacity: [0, 1] }, { delay: stagger(0.12, { startDelay: 0.7 }), type: "spring", stiffness: 260, damping: 14 });
+    animate($("path[stroke-width='15']", art), { opacity: [0, 1] }, { delay: stagger(0.2, { startDelay: 0.5 }), duration: 0.6 });
+  }
+
+  // Faixa de números: contagem + entrada
+  const stats = sections[1];
+  inView(stats, () => {
+    animate($(":scope > div", stats), { opacity: [0, 1], y: [24, 0] }, { delay: stagger(0.1), duration: 0.6, ease: "easeOut" });
+    const n = $(":scope > div > div:first-child", stats)[0];
+    if (n && /^\d+$/.test(n.textContent.trim())) animate(0, +n.textContent, { duration: 1.2, ease: "easeOut", onUpdate: (v) => (n.textContent = Math.round(v)) });
+  }, { amount: 0.5 });
+
+  // Cards de argumentos e demais seções
+  sections.slice(2, -1).forEach((sec) => {
+    const head = $(":scope > div > div, :scope > div > h2", sec);
+    head.forEach((el) => (el.style.opacity = 0));
+    inView(sec, () => {
+      animate(head, { opacity: [0, 1], y: [24, 0] }, { delay: stagger(0.08), duration: 0.6, ease: "easeOut" });
+    }, { amount: 0.15 });
+
+    const cards = $("div[style*='border-top']", sec);
+    cards.forEach((c) => (c.style.opacity = 0));
+    cards.forEach((card) => {
+      inView(card, () => {
+        animate(card, { opacity: [0, 1], y: [40, 0] }, { duration: 0.7, ease: [0.22, 1, 0.36, 1] });
+        const svg = card.querySelector("svg");
+        if (svg) animate(svg, { scale: [0.6, 1], rotate: [-8, 0] }, { delay: 0.15, type: "spring", stiffness: 220, damping: 12 });
+      }, { amount: 0.25 });
+      hover(card, () => {
+        animate(card, { y: -6 }, { type: "spring", stiffness: 300, damping: 20 });
+        return () => animate(card, { y: 0 }, { type: "spring", stiffness: 300, damping: 20 });
+      });
+    });
+  });
+
+  // Seção CTA vermelha
+  const cta = sections[sections.length - 1];
+  const ctaSvg = cta?.querySelector("svg");
+  if (ctaSvg) {
+    ctaSvg.style.opacity = 0;
+    inView(cta, () => {
+      animate(ctaSvg, { opacity: [0, 1], x: [60, 0] }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
+      animate($("rect, circle", ctaSvg), { scale: [0.6, 1] }, { delay: stagger(0.08, { startDelay: 0.3 }), type: "spring", stiffness: 260, damping: 14 });
+    }, { amount: 0.3 });
+  }
+
+  // Botões: mola ao passar o mouse / clicar
+  $("a[href^='https://wa.me']").forEach((a) => {
+    a.style.display = a.style.display || "inline-block";
+    hover(a, () => {
+      animate(a, { scale: 1.05 }, { type: "spring", stiffness: 400, damping: 18 });
+      return () => animate(a, { scale: 1 }, { type: "spring", stiffness: 400, damping: 18 });
+    });
+  });
+
+  // Parallax suave na ilustração do hero
+  if (art) scroll(animate(art, { y: [0, -50] }, { ease: "linear" }), { target: hero, offset: ["start start", "end start"] });
+
+  // Barra de progresso de leitura
+  const bar = document.createElement("div");
+  bar.style.cssText = "position:fixed;top:0;left:0;right:0;height:3px;background:#E8351B;transform-origin:0 50%;transform:scaleX(0);z-index:100;pointer-events:none";
+  document.body.appendChild(bar);
+  scroll(animate(bar, { scaleX: [0, 1] }, { ease: "linear" }));
+});
+</script>
 </body>
 </html>
