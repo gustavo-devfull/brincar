@@ -1,439 +1,900 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<title>brincar.ia.br — domínio à venda</title>
+<meta name="description" content="brincar.ia.br está à venda: um nome curto, óbvio e em português, na extensão brasileira dedicada à inteligência artificial.">
+<meta name="theme-color" content="#F2F1EF">
+<meta property="og:title" content="brincar.ia.br — domínio à venda">
+<meta property="og:description" content="Um verbo em português na extensão brasileira de IA. Venda direta pelo titular.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fg: #16130F; --bg: #F2F1EF; --red: #E8351B;
+    --mut: #6B6864; --body: #55524E; --line: #C9C6C1; --soft: #E9E7E3;
+    --pad: clamp(20px, 4vw, 56px); --hh: 58px;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body { font-family: Archivo, system-ui, sans-serif; color: var(--fg); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: var(--red); text-decoration: none; }
+  h1, h2, h3, p { margin: 0; }
+  svg { display: block; overflow: visible; }
+  svg text { font-family: Archivo, sans-serif; font-weight: 800; }
+
+  /* ---------- svg helpers ---------- */
+  .fs { fill: var(--soft); } .fg { fill: var(--fg); } .fb { fill: var(--bg); } .fr { fill: var(--red); } .fw { fill: #fff; } .nf { fill: none; }
+  .sg { stroke: var(--fg); } .sb { stroke: var(--bg); } .sr { stroke: var(--red); } .sw { stroke: #fff; }
+  .lc { stroke-linecap: round; stroke-linejoin: round; }
+  .t { transform-box: fill-box; transform-origin: 50% 50%; }
+  .dr { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .b-r rect { fill: var(--red); } .b-r text { fill: #fff; }
+  .b-i rect { fill: var(--fg); } .b-i text { fill: var(--bg); }
+  .b-p rect { fill: var(--bg); stroke: var(--fg); stroke-width: 3; } .b-p text { fill: var(--fg); }
+
+  /* ---------- chrome ---------- */
+  #bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); z-index: 120; pointer-events: none; }
+  header.top { position: fixed; top: 0; left: 0; right: 0; height: var(--hh); z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 var(--pad); background: var(--bg); border-bottom: 1px solid #16130F; }
+  .logo { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; color: #16130F; }
+  .logo span { color: var(--red); }
+  .top-r { display: flex; align-items: center; gap: 22px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .top-r .sale { color: var(--mut); }
+  .top-r a { border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+
+  #dots { position: fixed; right: clamp(10px, 1.6vw, 24px); top: 50%; transform: translateY(-50%); z-index: 90; display: flex; flex-direction: column; gap: 12px; --c: #16130F; }
+  #dots[data-dark] { --c: #F2F1EF; }
+  #dots a { position: relative; display: block; width: 10px; height: 10px; border: 2px solid var(--c); transition: background .25s, transform .25s var(--ease), border-color .25s; }
+  #dots a.on { background: var(--red); border-color: var(--red); transform: scale(1.35); }
+  #dots a span { position: absolute; right: 22px; top: 50%; transform: translate(6px, -50%); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--c); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+  #dots a:hover span, #dots a:focus-visible span { opacity: 1; transform: translate(0, -50%); }
+  @media (max-width: 1000px) { #dots { display: none; } }
+
+  /* ---------- scenes ---------- */
+  .scene { position: relative; height: var(--h, 260vh); background: var(--bg); color: var(--fg); }
+  .scene.dark { --fg: #F2F1EF; --bg: #16130F; --mut: #A9A5A0; --body: #C9C6C1; --line: #3A3733; --soft: #26211C; }
+  .stage { position: sticky; top: 0; height: 100vh; height: 100svh; padding: var(--hh) var(--pad) 0; display: flex; align-items: center; overflow: hidden; }
+  .wrap { position: relative; z-index: 1; max-width: 1400px; width: 100%; height: 100%; margin: 0 auto; padding: 24px 0; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+  .copy { min-width: 0; }
+  .art { min-width: 0; min-height: 0; max-height: 100%; display: flex; align-items: center; justify-content: center; }
+  .art > svg { width: 100%; height: auto; max-height: 100%; }
+  .big { position: absolute; z-index: 0; right: -2vw; bottom: -.16em; font-size: clamp(200px, 38vw, 560px); font-weight: 800; line-height: 1; letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 1.5px var(--line); opacity: .7; pointer-events: none; user-select: none; will-change: transform; }
+
+  .lab { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--red); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+  .lab::before { content: ""; width: 28px; height: 2px; background: var(--red); }
+  h2 { font-size: clamp(28px, 3.7vw, 54px); line-height: 1.04; font-weight: 800; letter-spacing: -.035em; text-wrap: balance; margin-bottom: 20px; }
+  h2 em { font-style: normal; color: var(--red); }
+  .copy p { max-width: 44ch; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.6; color: var(--body); text-wrap: pretty; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .chip { border: 1px solid var(--red); color: var(--red); font-size: 12px; font-weight: 600; padding: 6px 10px; }
+  .note { margin-top: 10px; font-size: 11px; color: var(--mut); letter-spacing: .04em; }
+
+  /* revelar ao entrar (bidirecional, via IntersectionObserver) */
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * .09s); }
+  .scene.live .rv { opacity: 1; transform: none; }
+  [data-in] { opacity: 0; }
+
+  /* botões */
+  .btn { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; padding: 15px 22px; border: 1px solid var(--red); background: var(--red); color: #fff; transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), background .2s, color .2s, border-color .2s; }
+  .btn:hover { background: #16130F; border-color: #16130F; color: #fff; transform: scale(1.05); }
+  .btn.ghost { background: transparent; color: #16130F; border-color: #16130F; }
+  .btn.ghost:hover { background: #16130F; color: #F2F1EF; }
+  .btn.white { background: #fff; color: var(--red); border-color: #fff; font-size: 15px; padding: 17px 24px; }
+  .btn.white:hover { background: #16130F; color: #fff; border-color: #16130F; }
+  .btn svg { width: 18px; height: 18px; }
+
+  /* ---------- hero ---------- */
+  .hero-text { min-width: 0; will-change: transform, opacity; }
+  .hero-text > * { animation: rise .9s var(--ease) both; animation-delay: calc(.12s * var(--i) + .15s); }
+  .hero-text .chips { margin: 0 0 28px; }
+  .hero-text h1 { font-size: clamp(44px, 7.4vw, 104px); line-height: .92; font-weight: 800; letter-spacing: -.045em; text-wrap: balance; margin-bottom: 26px; }
+  .hero-text h1 span { color: var(--red); }
+  .hero-text .lead { max-width: 46ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.55; color: #3A3733; margin-bottom: 32px; text-wrap: pretty; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+  .small { font-size: 13px; color: var(--mut); }
+  #heroArt { will-change: transform, opacity; animation: zoomin 1s var(--ease) .25s both; }
+  .drop { animation: drop .9s cubic-bezier(.3, 1.5, .5, 1) both; animation-delay: calc(.6s + var(--d, 0s)); }
+  .bob { animation: bob 4.5s ease-in-out infinite; transform-origin: 400px 120px; }
+  .spin { animation: spin 14s linear infinite; transform-origin: 508px 322px; }
+  .cue { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); }
+  .cue i { width: 2px; height: 34px; background: var(--line); position: relative; overflow: hidden; }
+  .cue i::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 12px; background: var(--red); animation: nudge 1.6s ease-in-out infinite; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } }
+  @keyframes zoomin { from { opacity: 0; scale: .92; } }
+  @keyframes drop { from { opacity: 0; transform: translateY(-70px); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes nudge { 0% { transform: translateY(-14px); } 100% { transform: translateY(36px); } }
+  @keyframes pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3.2); opacity: 0; } }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- 02 navegador ---------- */
+  .browser { width: 100%; max-width: 640px; border: 3px solid var(--fg); background: var(--bg); position: relative; }
+  .browser .bar { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 3px solid var(--fg); }
+  .browser .bar > i { width: 11px; height: 11px; background: var(--fg); flex: none; }
+  .browser .bar > i:first-child { background: var(--red); }
+  .url { flex: 1; min-width: 0; margin-left: 8px; border: 2px solid var(--line); padding: 9px 12px; font-size: clamp(14px, 1.7vw, 22px); font-weight: 700; letter-spacing: -.02em; white-space: nowrap; overflow: hidden; display: flex; align-items: center; transition: border-color .3s, box-shadow .3s; }
+  .url.done { border-color: var(--red); box-shadow: 0 0 0 4px rgba(232, 53, 27, .15); }
+  .url .pre { color: var(--mut); font-weight: 500; margin-right: 2px; }
+  .url .tld { color: var(--red); }
+  .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--fg); margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  .page { padding: clamp(14px, 2.4vw, 28px); background: var(--bg); }
+  .page svg { width: 100%; height: auto; }
+  .sticker { position: absolute; right: -14px; top: -34px; width: 92px; height: 92px; display: grid; place-items: center; background: var(--red); color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -.03em; line-height: 1; text-align: center; border: 3px solid var(--fg); }
+  .sticker small { display: block; font-size: 10px; letter-spacing: .14em; margin-top: 4px; font-weight: 600; }
+
+  /* ---------- 04 gráfico de barras ---------- */
+  .chart { width: 100%; max-width: 620px; }
+  .chart .xl { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 12px; }
+  .chart .xl span { text-align: center; font-size: clamp(9px, 1vw, 11px); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--fg); padding: 0 2px; line-height: 1.3; }
+  .bar-s { transform-box: fill-box; transform-origin: 50% 100%; }
+
+  /* ---------- 05 gráfico de linhas ---------- */
+  .lines { position: relative; width: 100%; max-width: 640px; }
+  .lines .flag { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); white-space: nowrap; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; font-size: 12px; font-weight: 600; color: var(--fg); }
+  .legend i { display: inline-block; width: 22px; height: 4px; margin-right: 8px; vertical-align: middle; }
+
+  /* ---------- 06 para quem (horizontal) ---------- */
+  .stage.col { flex-direction: column; justify-content: center; align-items: stretch; gap: clamp(18px, 4svh, 40px); padding-left: 0; padding-right: 0; padding-bottom: 24px; }
+  .qhead { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 var(--pad); position: relative; z-index: 1; }
+  .qhead h2 { margin-bottom: 12px; }
+  .qhead p { max-width: 46ch; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.6; color: var(--body); }
+  .track { position: relative; z-index: 1; display: flex; gap: clamp(14px, 2vw, 28px); padding: 0 var(--pad); width: max-content; will-change: transform; }
+  .qcard { flex: none; width: clamp(240px, 24vw, 330px); min-height: clamp(250px, 40svh, 340px); border: 1px solid var(--fg); background: var(--bg); padding: 22px; display: flex; flex-direction: column; transition: transform .4s var(--ease), border-color .3s; will-change: opacity; }
+  .qcard:hover { transform: translateY(-8px); border-color: var(--red); }
+  .qcard svg { width: 120px; height: 90px; margin-bottom: auto; transform-origin: 0 100%; will-change: transform; }
+  .qcard .n { margin-top: 20px; font-size: 11px; font-weight: 600; color: var(--red); margin-bottom: 8px; }
+  .qcard h3 { font-size: clamp(16px, 1.45vw, 20px); line-height: 1.22; font-weight: 700; letter-spacing: -.015em; }
+  .qprog { position: relative; z-index: 1; height: 2px; background: var(--line); margin: 0 var(--pad); max-width: 1400px; align-self: stretch; }
+  .qprog i { position: absolute; inset: 0; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); }
+  @media (min-width: 1500px) { .qprog { margin-left: auto; margin-right: auto; width: calc(100% - 2 * var(--pad)); } }
+
+  /* ---------- 07 como comprar ---------- */
+  .stage.buy { flex-direction: column; align-items: stretch; justify-content: center; gap: clamp(24px, 5svh, 56px); }
+  .buy .head, .buy .steps, .buy .seal { width: 100%; max-width: 1400px; margin-left: auto; margin-right: auto; position: relative; z-index: 1; }
+  .buy h2 { margin-bottom: 0; }
+  .steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 56px); padding-top: 34px; --rp: 0; }
+  .rail { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--line); }
+  .rail .fill { position: absolute; inset: 0; background: var(--red); transform-origin: 0 50%; transform: scaleX(var(--rp)); }
+  .rail .trav { position: absolute; top: -9px; left: calc(var(--rp) * 100% - 10px); width: 20px; height: 20px; background: var(--red); border: 3px solid var(--bg); outline: 2px solid var(--red); rotate: calc(var(--rp) * 540deg); }
+  .step { opacity: .25; transform: translateY(18px); transition: opacity .5s var(--ease), transform .6s var(--ease); }
+  .step.on { opacity: 1; transform: none; }
+  .step svg { width: 90px; height: 60px; margin-bottom: 16px; transform-origin: 0 100%; }
+  .step.on svg { animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both; }
+  .step .n { font-size: 26px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 12px; }
+  .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .step p { font-size: 14px; line-height: 1.6; color: var(--body); max-width: 34ch; text-wrap: pretty; }
+  @keyframes pop { from { transform: scale(.5) rotate(-10deg); } }
+  .seal { display: flex; align-items: center; gap: 18px; border-top: 1px solid var(--fg); padding-top: 18px; }
+  .seal svg { width: 56px; height: 56px; flex: none; }
+  .seal b { font-size: clamp(30px, 4vw, 52px); font-weight: 800; letter-spacing: -.04em; line-height: 1; margin-right: 8px; color: var(--red); }
+  .seal p { font-size: 14px; line-height: 1.5; color: var(--body); max-width: 56ch; }
+
+  /* ---------- 08 CTA ---------- */
+  .wipe { position: absolute; inset: 0; background: var(--red); clip-path: circle(0% at 50% 100%); }
+  .cta { color: #fff; }
+  .cta h2 { font-size: clamp(32px, 4.8vw, 66px); line-height: 1.02; letter-spacing: -.04em; margin-bottom: 24px; }
+  .cta p { max-width: 42ch; font-size: 16px; line-height: 1.55; color: #fff; margin-bottom: 36px; }
+  .cta .art svg { max-width: 560px; }
+  footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 22px var(--pad); font-size: 12px; color: var(--mut); background: var(--bg); }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 860px) {
+    :root { --hh: 54px; }
+    .top-r .sale { display: none; }
+    .wrap { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 12px; align-content: center; padding: 14px 0 18px; }
+    .art { justify-content: center; }
+    .art > svg { width: auto; max-width: 100%; height: 100%; }
+    h2 { font-size: clamp(25px, 7.4vw, 34px); margin-bottom: 12px; }
+    .lab { margin-bottom: 12px; }
+    .copy p { font-size: 14px; line-height: 1.5; }
+    .chips { margin-top: 14px; gap: 6px; }
+    .chip { font-size: 11px; padding: 5px 8px; }
+    .big { font-size: 62vw; right: -6vw; }
+    .hero-text h1 { font-size: clamp(40px, 12.4vw, 66px); margin-bottom: 16px; }
+    .hero-text .chips { margin-bottom: 18px; }
+    .hero-text .lead { font-size: 14px; margin-bottom: 20px; }
+    .btn { font-size: 13px; padding: 13px 16px; }
+    .hero-text .small { display: none; }
+    .btns { margin-bottom: 0; }
+    .cue { display: none; }
+    .browser .bar { padding: 9px 10px; }
+    .sticker { width: 70px; height: 70px; font-size: 17px; right: -6px; top: -26px; }
+    .qcard { width: 66vw; min-height: 0; padding: 18px; }
+    .qcard svg { width: 96px; height: 72px; }
+    .stage.buy { gap: 16px; }
+    .steps { grid-template-columns: 1fr; gap: 14px; padding: 0 0 0 34px; }
+    .rail { top: 0; bottom: 0; left: 0; right: auto; width: 2px; height: auto; }
+    .rail .fill { transform-origin: 50% 0; transform: scaleY(var(--rp)); }
+    .rail .trav { left: -9px; top: calc(var(--rp) * 100% - 10px); }
+    .step { display: grid; grid-template-columns: 62px 1fr; column-gap: 14px; }
+    .step svg { width: 62px; height: 42px; grid-row: 1 / span 3; margin: 0; }
+    .step .n { font-size: 18px; margin-bottom: 4px; }
+    .step h3 { font-size: 15px; margin-bottom: 4px; }
+    .step p { font-size: 13px; line-height: 1.45; }
+    .seal { gap: 12px; padding-top: 12px; }
+    .seal svg { width: 40px; height: 40px; }
+    .seal p { font-size: 12px; }
+    .cta h2 { font-size: clamp(28px, 8.4vw, 40px); margin-bottom: 14px; }
+    .cta p { font-size: 14px; margin-bottom: 20px; }
+  }
+
+  /* ---------- sem animação / sem JS ---------- */
+  .reduce .scene, .nojs .scene { height: auto !important; }
+  .reduce .stage, .nojs .stage { position: relative; height: auto; min-height: 100svh; }
+  .reduce .stage.col, .nojs .stage.col { padding-top: calc(var(--hh) + 20px); }
+  .reduce .track, .nojs .track { width: auto; flex-wrap: wrap; }
+  .reduce .qprog, .nojs .qprog, .reduce .cue, .nojs .cue { display: none; }
+  .reduce .rv, .nojs .rv, .reduce [data-in], .nojs [data-in] { opacity: 1 !important; transform: none !important; }
+  .reduce .wipe, .nojs .wipe { clip-path: none; }
+  .reduce .hero-text > *, .reduce #heroArt, .reduce .drop, .reduce .bob, .reduce .spin, .reduce .cue i::after { animation: none; }
+  .reduce .step, .nojs .step { opacity: 1; transform: none; }
+  .reduce html, html.reduce { scroll-behavior: auto; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+<noscript><style>.scene { height: auto !important; } .stage { position: relative; height: auto; min-height: 100svh; } .rv, [data-in] { opacity: 1 !important; transform: none !important; } .track { width: auto; flex-wrap: wrap; } .wipe { clip-path: none; } .step { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<style>
-  html, body { margin: 0; padding: 0; background: #F2F1EF; }
-  * { box-sizing: border-box; }
-  a { color: #E8351B; text-decoration: none; }
-  a:hover { color: #16130F; }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  @keyframes spin { to { transform: rotate(360deg); } }
-</style>
-</helmet>
-<div style="font-family: Archivo, system-ui, sans-serif; background: #F2F1EF; color: #16130F; -webkit-font-smoothing: antialiased">
+<div id="bar"></div>
 
-  <header style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px clamp(20px, 4vw, 56px); border-bottom: 1px solid #16130F">
-    <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em">brincar<span style="color: #E8351B">.ia.br</span></div>
-    <div style="display: flex; align-items: center; gap: 22px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase">
-      <span style="color: #6B6864">Domínio à venda</span>
-      <a href="https://wa.me/5516997520110" style="color: #E8351B; border-bottom: 2px solid #E8351B; padding-bottom: 2px">WhatsApp</a>
-    </div>
-  </header>
+<header class="top">
+  <div class="logo">brincar<span>.ia.br</span></div>
+  <div class="top-r">
+    <span class="sale">Domínio à venda</span>
+    <a href="https://wa.me/5516997520110">WhatsApp</a>
+  </div>
+</header>
 
-  <section style="border-bottom: 1px solid #16130F; padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px) clamp(40px, 6vw, 72px)">
-    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center">
-      <div style="min-width: 0">
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px">
-          <span style="border: 1px solid #E8351B; color: #E8351B; font-size: 11px; font-weight: 500; padding: 5px 9px">Extensão .ia.br</span>
-          <span style="border: 1px solid #E8351B; color: #E8351B; font-size: 11px; font-weight: 500; padding: 5px 9px">7 letras</span>
-          <span style="border: 1px solid #E8351B; color: #E8351B; font-size: 11px; font-weight: 500; padding: 5px 9px">Verbo em português</span>
+<nav id="dots" aria-label="Capítulos"></nav>
+
+<main>
+
+<!-- ============ 00 · ABERTURA ============ -->
+<section class="scene" id="topo" data-scene="hero" data-title="Início" style="--h:215vh">
+  <div class="stage">
+    <div class="wrap">
+      <div class="hero-text" id="heroText">
+        <div class="chips" style="--i:0">
+          <span class="chip">Extensão .ia.br</span>
+          <span class="chip">7 letras</span>
+          <span class="chip">Verbo em português</span>
         </div>
-        <h1 style="margin: 0 0 26px; font-size: clamp(44px, 7.4vw, 104px); line-height: 0.92; font-weight: 800; letter-spacing: -0.045em; text-wrap: balance">brincar<span style="color: #E8351B">.ia.br</span></h1>
-        <p style="margin: 0 0 32px; max-width: 46ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.55; color: #3A3733; text-wrap: pretty">Um nome curto, óbvio e em português, na extensão brasileira dedicada à inteligência artificial. Feito para quem vai construir IA para crianças, educação, jogos e aprendizado lúdico.</p>
-        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px">
-          <a href="https://wa.me/5516997520110" style="background: #E8351B; color: #FFFFFF; font-size: 14px; font-weight: 700; padding: 15px 22px; border: 1px solid #E8351B" style-hover="background: #16130F; border-color: #16130F; color: #FFFFFF">Falar com Gustavo no WhatsApp</a>
-          <a href="#argumentos" style="color: #16130F; font-size: 14px; font-weight: 700; padding: 15px 22px; border: 1px solid #16130F" style-hover="background: #16130F; color: #F2F1EF">Ver argumentos</a>
+        <h1 style="--i:1">brincar<span>.ia.br</span></h1>
+        <p class="lead" style="--i:2">Um nome curto, óbvio e em português, na extensão brasileira dedicada à inteligência artificial. Feito para quem vai construir IA para crianças, educação, jogos e aprendizado lúdico.</p>
+        <div class="btns" style="--i:3">
+          <a class="btn" href="https://wa.me/5516997520110">Falar com Gustavo no WhatsApp</a>
+          <a class="btn ghost" href="#palavra">Ver a história</a>
         </div>
-        <p style="margin: 0; font-size: 13px; color: #6B6864">(16) 99752-0110 — resposta no mesmo dia</p>
+        <p class="small" style="--i:4">(16) 99752-0110 — resposta no mesmo dia</p>
       </div>
 
-      <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-      <div style="min-width: 0">
-        <svg viewBox="0 0 560 420" style="width: 100%; height: auto; display: block">
-          <circle cx="300" cy="170" r="142" fill="#E9E7E3" />
-          <line x1="8" y1="350" x2="552" y2="350" stroke="#16130F" stroke-width="3" />
-          <path d="M70 350 A105 105 0 0 1 280 350" fill="none" stroke="#16130F" stroke-width="15" />
-          <path d="M113 350 A62 62 0 0 1 237 350" fill="none" stroke="#E8351B" stroke-width="15" />
-          <g style="animation: bob 4.5s ease-in-out infinite; transform-origin: 400px 120px">
-            <line x1="400" y1="34" x2="400" y2="58" stroke="#16130F" stroke-width="3" />
-            <circle cx="400" cy="27" r="9" fill="#E8351B" />
-            <rect x="330" y="58" width="140" height="106" rx="20" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <circle cx="368" cy="102" r="10" fill="#16130F" />
-            <circle cx="432" cy="102" r="10" fill="#16130F" />
-            <path d="M366 130 Q400 152 434 130" fill="none" stroke="#E8351B" stroke-width="5" stroke-linecap="round" />
+      <div class="art" id="heroArt" aria-hidden="true">
+        <svg viewBox="0 0 560 420">
+          <circle cx="300" cy="170" r="142" class="fs" />
+          <line x1="8" y1="350" x2="552" y2="350" class="sg" stroke-width="3" />
+          <path d="M70 350 A105 105 0 0 1 280 350" class="nf sg" stroke-width="15" />
+          <path d="M113 350 A62 62 0 0 1 237 350" class="nf sr" stroke-width="15" />
+          <g class="bob">
+            <line x1="400" y1="34" x2="400" y2="58" class="sg" stroke-width="3" />
+            <circle cx="400" cy="27" r="9" class="fr" />
+            <rect x="330" y="58" width="140" height="106" rx="20" class="fb sg" stroke-width="3" />
+            <circle cx="368" cy="102" r="10" class="fg" />
+            <circle cx="432" cy="102" r="10" class="fg" />
+            <path d="M366 130 Q400 152 434 130" class="nf sr lc" stroke-width="5" />
           </g>
-          <rect x="316" y="276" width="74" height="74" fill="#E8351B" />
-          <rect x="398" y="276" width="74" height="74" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-          <rect x="357" y="200" width="74" height="74" fill="#16130F" />
-          <text x="353" y="326" text-anchor="middle" font-family="Archivo, sans-serif" font-size="34" font-weight="800" fill="#F2F1EF">b</text>
-          <text x="435" y="326" text-anchor="middle" font-family="Archivo, sans-serif" font-size="34" font-weight="800" fill="#16130F">r</text>
-          <text x="394" y="250" text-anchor="middle" font-family="Archivo, sans-serif" font-size="34" font-weight="800" fill="#E8351B">ia</text>
-          <g style="animation: spin 14s linear infinite; transform-origin: 508px 322px">
-            <circle cx="508" cy="322" r="28" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <path d="M508 294 A28 28 0 0 1 536 322 L508 322 Z" fill="#E8351B" />
+          <g class="drop" style="--d:0s"><rect x="316" y="276" width="74" height="74" class="fr" /><text x="353" y="326" text-anchor="middle" font-size="34" class="fw">b</text></g>
+          <g class="drop" style="--d:.12s"><rect x="398" y="276" width="74" height="74" class="fb sg" stroke-width="3" /><text x="435" y="326" text-anchor="middle" font-size="34" class="fg">r</text></g>
+          <g class="drop" style="--d:.24s"><rect x="357" y="200" width="74" height="74" class="fg" /><text x="394" y="250" text-anchor="middle" font-size="34" class="fr">ia</text></g>
+          <g class="spin">
+            <circle cx="508" cy="322" r="28" class="fb sg" stroke-width="3" />
+            <path d="M508 294 A28 28 0 0 1 536 322 L508 322 Z" class="fr" />
           </g>
-          <path d="M172 214 l0 -34 M155 197 l34 0" stroke="#16130F" stroke-width="4" stroke-linecap="round" />
-          <path d="M96 150 l0 -26 M83 137 l26 0" stroke="#E8351B" stroke-width="4" stroke-linecap="round" />
-          <circle cx="196" cy="118" r="7" fill="#16130F" />
+          <path d="M172 214 l0 -34 M155 197 l34 0" class="nf sg lc" stroke-width="4" />
+          <path d="M96 150 l0 -26 M83 137 l26 0" class="nf sr lc" stroke-width="4" />
+          <circle cx="196" cy="118" r="7" class="fg" />
         </svg>
       </div>
-      </sc-if>
     </div>
-  </section>
+    <div class="cue" id="cue"><span>Role</span><i></i></div>
+  </div>
+</section>
 
-  <section style="border-bottom: 1px solid #16130F; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr))">
-    <div style="padding: 28px clamp(20px, 3vw, 36px); border-right: 1px solid #16130F">
-      <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1">7</div>
-      <div style="margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6864">Letras, sem hífen</div>
-    </div>
-    <div style="padding: 28px clamp(20px, 3vw, 36px); border-right: 1px solid #16130F">
-      <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1">.ia.br</div>
-      <div style="margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6864">O endereço de IA no Brasil</div>
-    </div>
-    <div style="padding: 28px clamp(20px, 3vw, 36px); border-right: 1px solid #16130F">
-      <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1">1º</div>
-      <div style="margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6864">Dono do nome exato</div>
-    </div>
-    <div style="padding: 28px clamp(20px, 3vw, 36px)">
-      <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1">48h</div>
-      <div style="margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6864">Transferência no Registro.br</div>
-    </div>
-  </section>
-
-  <section id="argumentos" style="border-bottom: 1px solid #16130F; padding: clamp(40px, 6vw, 84px) clamp(20px, 4vw, 56px)">
-    <div style="max-width: 1400px; margin: 0 auto">
-      <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E8351B; margin-bottom: 20px">Argumentos</div>
-      <h2 style="margin: 0 0 clamp(36px, 5vw, 60px); max-width: 18ch; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; font-weight: 800; letter-spacing: -0.035em; text-wrap: balance">Por que brincar.ia.br vale mais do que um nome inventado</h2>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(28px, 3vw, 44px)">
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 70" style="width: 90px; height: 70px; display: block; margin-bottom: 18px">
-            <path d="M4 6 h70 v40 h-44 l-14 14 v-14 h-12 z" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <path d="M18 22 h30 M18 33 h18" stroke="#E8351B" stroke-width="4" stroke-linecap="round" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 11px; font-weight: 600; color: #E8351B; margin-bottom: 10px">01</div>
-          <h3 style="margin: 0 0 12px; font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em">Palavra que todo mundo já conhece</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">"Brincar" não precisa ser explicado, soletrado nem ensinado. Zero custo de memorização — o oposto de uma marca inventada, que exige anos de mídia para significar algo.</p>
-        </div>
-
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 70" style="width: 90px; height: 70px; display: block; margin-bottom: 18px">
-            <line x1="20" y1="6" x2="20" y2="64" stroke="#16130F" stroke-width="3" />
-            <path d="M20 10 h46 l-12 14 12 14 h-46 z" fill="#E8351B" />
-            <circle cx="20" cy="64" r="5" fill="#16130F" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 11px; font-weight: 600; color: #E8351B; margin-bottom: 10px">02</div>
-          <h3 style="margin: 0 0 12px; font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em">A extensão certa no momento certo</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">.ia.br é o endereço nacional para projetos de inteligência artificial. O nome já comunica categoria e país antes do primeiro clique — e os nomes curtos e genéricos são os primeiros a sair.</p>
-        </div>
-
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 70" style="width: 90px; height: 70px; display: block; margin-bottom: 18px">
-            <circle cx="35" cy="35" r="28" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <path d="M28 22 l22 13 -22 13 z" fill="#E8351B" />
-            <path d="M70 24 l0 22 M62 35 l16 0" stroke="#16130F" stroke-width="3" stroke-linecap="round" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 11px; font-weight: 600; color: #E8351B; margin-bottom: 10px">03</div>
-          <h3 style="margin: 0 0 12px; font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em">Verbo = produto em ação</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Domínios com verbo convidam ao uso. "Vamos brincar" já é uma chamada para ação pronta, em campanha, em anúncio e na boca do usuário.</p>
-        </div>
-
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 70" style="width: 90px; height: 70px; display: block; margin-bottom: 18px">
-            <line x1="6" y1="62" x2="84" y2="62" stroke="#16130F" stroke-width="3" />
-            <rect x="12" y="40" width="16" height="22" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <rect x="36" y="26" width="16" height="36" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <rect x="60" y="10" width="16" height="52" fill="#E8351B" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 11px; font-weight: 600; color: #E8351B; margin-bottom: 10px">04</div>
-          <h3 style="margin: 0 0 12px; font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em">Mercado grande e em alta</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Educação infantil, brinquedos, games, terapia lúdica e edtech somam milhões de famílias brasileiras — todas segmentos que estão levando IA para dentro do produto agora.</p>
-        </div>
-
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 70" style="width: 90px; height: 70px; display: block; margin-bottom: 18px">
-            <ellipse cx="45" cy="54" rx="30" ry="9" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <ellipse cx="45" cy="38" rx="30" ry="9" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <ellipse cx="45" cy="22" rx="30" ry="9" fill="#E8351B" />
-            <path d="M45 10 l0 -6" stroke="#16130F" stroke-width="3" stroke-linecap="round" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 11px; font-weight: 600; color: #E8351B; margin-bottom: 10px">05</div>
-          <h3 style="margin: 0 0 12px; font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em">Ativo, não despesa</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Um domínio exato de categoria não deprecia como mídia paga: ele fica no seu balanço, protege sua marca e continua valendo depois da campanha acabar.</p>
-        </div>
-
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 70" style="width: 90px; height: 70px; display: block; margin-bottom: 18px">
-            <path d="M45 6 l28 10 v22 c0 16 -14 24 -28 28 c-14 -4 -28 -12 -28 -28 v-22 z" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <path d="M32 36 l10 10 18 -20" fill="none" stroke="#E8351B" stroke-width="5" stroke-linecap="round" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 11px; font-weight: 600; color: #E8351B; margin-bottom: 10px">06</div>
-          <h3 style="margin: 0 0 12px; font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em">Transferência simples e segura</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Registro brasileiro, transferência direta de titularidade no Registro.br. Sem intermediário estrangeiro, sem burocracia — pagamento e passagem no mesmo dia.</p>
+<!-- ============ 01 · A PALAVRA ============ -->
+<section class="scene" id="palavra" data-scene="palavra" data-title="A palavra" style="--h:280vh">
+  <div class="stage">
+    <div class="big" data-par="-120" aria-hidden="true">01</div>
+    <div class="wrap">
+      <div class="copy">
+        <div class="lab rv" style="--i:0">01 · A palavra</div>
+        <h2 class="rv" style="--i:1">Todo mundo já sabe o que é <em>brincar</em>.</h2>
+        <p class="rv" style="--i:2">"Brincar" não precisa ser explicado, soletrado nem ensinado. Zero custo de memorização — o oposto de uma marca inventada, que exige anos de mídia para significar algo.</p>
+        <div class="chips">
+          <span class="chip" data-in=".42">Sem explicar</span>
+          <span class="chip" data-in=".52">Sem soletrar</span>
+          <span class="chip" data-in=".62">Sem ensinar</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section style="border-bottom: 1px solid #16130F; padding: clamp(40px, 6vw, 84px) clamp(20px, 4vw, 56px)">
-    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: start">
-      <div style="min-width: 0">
-        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E8351B; margin-bottom: 20px">Para quem</div>
-        <h2 style="margin: 0 0 20px; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.05; font-weight: 800; letter-spacing: -0.035em">Quem deveria ser o dono</h2>
-        <p style="margin: 0 0 34px; max-width: 40ch; font-size: 15px; line-height: 1.6; color: #55524E; text-wrap: pretty">Se o seu produto tem criança, jogo ou aprendizado de um lado e IA do outro, este nome resolve seu branding em uma linha.</p>
-        <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-        <svg viewBox="0 0 320 220" style="width: 100%; max-width: 320px; height: auto; display: block">
-          <line x1="10" y1="196" x2="310" y2="196" stroke="#16130F" stroke-width="3" />
-          <path d="M160 196 l0 -150" stroke="#16130F" stroke-width="4" />
-          <ellipse cx="160" cy="184" rx="88" ry="14" fill="#E8351B" />
-          <ellipse cx="160" cy="152" rx="70" ry="13" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-          <ellipse cx="160" cy="122" rx="54" ry="12" fill="#16130F" />
-          <ellipse cx="160" cy="94" rx="38" ry="11" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-          <circle cx="160" cy="54" r="16" fill="#E8351B" />
-          <path d="M252 96 l0 -22 M241 85 l22 0" stroke="#16130F" stroke-width="4" stroke-linecap="round" />
-          <circle cx="64" cy="78" r="8" fill="#16130F" />
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 560 430">
+          <circle cx="290" cy="170" r="150" class="fs" />
+          <line x1="8" y1="350" x2="552" y2="350" class="sg" stroke-width="3" />
+          <g id="blocks">
+            <g class="blk b-r t"><rect x="32" y="286" width="64" height="64" /><text x="64" y="332" text-anchor="middle" font-size="34">b</text></g>
+            <g class="blk b-i t"><rect x="104" y="286" width="64" height="64" /><text x="136" y="332" text-anchor="middle" font-size="34">r</text></g>
+            <g class="blk b-p t"><rect x="176" y="286" width="64" height="64" /><text x="208" y="332" text-anchor="middle" font-size="34">i</text></g>
+            <g class="blk b-r t"><rect x="248" y="286" width="64" height="64" /><text x="280" y="332" text-anchor="middle" font-size="34">n</text></g>
+            <g class="blk b-i t"><rect x="320" y="286" width="64" height="64" /><text x="352" y="332" text-anchor="middle" font-size="34">c</text></g>
+            <g class="blk b-p t"><rect x="392" y="286" width="64" height="64" /><text x="424" y="332" text-anchor="middle" font-size="34">a</text></g>
+            <g class="blk b-r t"><rect x="464" y="286" width="64" height="64" /><text x="496" y="332" text-anchor="middle" font-size="34">r</text></g>
+          </g>
+          <path id="dim" class="dr nf sg lc" pathLength="1" stroke-width="3" d="M32 384 H528 M32 374 V394 M528 374 V394" />
+          <text id="dimTxt" x="280" y="424" text-anchor="middle" font-size="20" class="fg" style="opacity:0">7 letras, sem hífen</text>
+          <g id="sp1" class="t"><path d="M108 130 l0 -34 M91 113 l34 0" class="nf sr lc" stroke-width="4" /></g>
+          <g id="sp2" class="t"><path d="M470 100 l0 -26 M457 87 l26 0" class="nf sg lc" stroke-width="4" /></g>
+          <circle id="sp3" class="fg t" cx="410" cy="170" r="8" />
         </svg>
-        </sc-if>
       </div>
-      <div style="min-width: 0">
-        <div style="display: flex; flex-direction: column">
-          <div style="display: flex; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #C9C6C1"><span style="color: #E8351B; font-size: 15px">&#8594;</span><span style="font-size: 15px; font-weight: 500">Startups de edtech e tutoria com IA</span></div>
-          <div style="display: flex; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #C9C6C1"><span style="color: #E8351B; font-size: 15px">&#8594;</span><span style="font-size: 15px; font-weight: 500">Fabricantes de brinquedos e brinquedos conectados</span></div>
-          <div style="display: flex; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #C9C6C1"><span style="color: #E8351B; font-size: 15px">&#8594;</span><span style="font-size: 15px; font-weight: 500">Escolas, redes de ensino e plataformas de conteúdo infantil</span></div>
-          <div style="display: flex; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #C9C6C1"><span style="color: #E8351B; font-size: 15px">&#8594;</span><span style="font-size: 15px; font-weight: 500">Estúdios de games e apps para família</span></div>
-          <div style="display: flex; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #C9C6C1"><span style="color: #E8351B; font-size: 15px">&#8594;</span><span style="font-size: 15px; font-weight: 500">Clínicas e projetos de terapia e desenvolvimento lúdico</span></div>
-          <div style="display: flex; gap: 16px; align-items: baseline; padding: 20px 0"><span style="color: #E8351B; font-size: 15px">&#8594;</span><span style="font-size: 15px; font-weight: 500">Investidores de domínios buscando .ia.br premium</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · A EXTENSÃO ============ -->
+<section class="scene" id="extensao" data-scene="extensao" data-title="A extensão" style="--h:280vh">
+  <div class="stage">
+    <div class="big" data-par="-120" aria-hidden="true">02</div>
+    <div class="wrap">
+      <div class="copy">
+        <div class="lab rv" style="--i:0">02 · A extensão</div>
+        <h2 class="rv" style="--i:1">O endereço da IA <em>no Brasil</em>.</h2>
+        <p class="rv" style="--i:2">.ia.br é o endereço nacional para projetos de inteligência artificial. O nome já comunica categoria e país antes do primeiro clique — e os nomes curtos e genéricos são os primeiros a sair.</p>
+        <div class="chips">
+          <span class="chip" data-in=".7">Categoria</span>
+          <span class="chip" data-in=".78">País</span>
+          <span class="chip" data-in=".86">Antes do primeiro clique</span>
+        </div>
+      </div>
+      <div class="art">
+        <div class="browser" id="browser" role="img" aria-label="Navegador com o endereço brincar.ia.br">
+          <div class="sticker" id="sticker" aria-hidden="true"><span>IA<small>BR</small></span></div>
+          <div class="bar">
+            <i></i><i></i><i></i>
+            <div class="url" id="url"><span class="pre">https://</span><span id="typed"></span><span class="tld" id="tldEl"></span><span class="caret"></span></div>
+          </div>
+          <div class="page" id="page">
+            <svg viewBox="0 0 400 200" aria-hidden="true">
+              <line x1="0" y1="188" x2="400" y2="188" class="sg" stroke-width="3" />
+              <rect x="40" y="132" width="56" height="56" class="fr" />
+              <rect x="104" y="132" width="56" height="56" class="fb sg" stroke-width="3" />
+              <rect x="72" y="76" width="56" height="56" class="fg" />
+              <text x="100" y="116" text-anchor="middle" font-size="22" class="fr">ia</text>
+              <g class="bob" style="transform-origin:285px 70px">
+                <line x1="285" y1="14" x2="285" y2="34" class="sg" stroke-width="3" />
+                <circle cx="285" cy="10" r="7" class="fr" />
+                <rect x="230" y="34" width="110" height="82" rx="14" class="fb sg" stroke-width="3" />
+                <circle cx="260" cy="68" r="8" class="fg" /><circle cx="310" cy="68" r="8" class="fg" />
+                <path d="M258 92 Q285 110 312 92" class="nf sr lc" stroke-width="4" />
+              </g>
+              <text x="285" y="160" text-anchor="middle" font-size="20" class="fg">Vamos brincar?</text>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section style="border-bottom: 1px solid #16130F; padding: clamp(40px, 6vw, 84px) clamp(20px, 4vw, 56px)">
-    <div style="max-width: 1400px; margin: 0 auto">
-      <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E8351B; margin-bottom: 28px">Como comprar</div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(28px, 3vw, 44px)">
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 60" style="width: 90px; height: 60px; display: block; margin-bottom: 16px">
-            <path d="M6 8 h58 v34 h-34 l-12 12 v-12 h-12 z" fill="#E8351B" />
-            <circle cx="28" cy="25" r="4" fill="#F2F1EF" /><circle cx="42" cy="25" r="4" fill="#F2F1EF" /><circle cx="56" cy="25" r="4" fill="#F2F1EF" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 26px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px">01</div>
-          <h3 style="margin: 0 0 10px; font-size: 16px; font-weight: 700">Você chama no WhatsApp</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Diga para que pretende usar o nome e faça sua proposta. Falo direto com você, sem intermediário.</p>
+<!-- ============ 03 · O VERBO ============ -->
+<section class="scene" id="verbo" data-scene="verbo" data-title="O verbo" style="--h:300vh">
+  <div class="stage">
+    <div class="big" data-par="-120" aria-hidden="true">03</div>
+    <div class="wrap">
+      <div class="copy">
+        <div class="lab rv" style="--i:0">03 · O verbo</div>
+        <h2 class="rv" style="--i:1">"Vamos brincar" já é uma <em>chamada para ação</em>.</h2>
+        <p class="rv" style="--i:2">Domínios com verbo convidam ao uso. É o produto em ação: uma frase pronta para campanha, para anúncio e para a boca do usuário.</p>
+        <div class="chips">
+          <span class="chip" data-in=".55">Em campanha</span>
+          <span class="chip" data-in=".65">Em anúncio</span>
+          <span class="chip" data-in=".75">Na boca do usuário</span>
         </div>
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 60" style="width: 90px; height: 60px; display: block; margin-bottom: 16px">
-            <circle cx="28" cy="30" r="20" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <circle cx="58" cy="30" r="20" fill="#E8351B" />
-            <path d="M22 30 h12 M28 24 v12" stroke="#16130F" stroke-width="3" stroke-linecap="round" />
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 560 420">
+          <circle cx="280" cy="190" r="150" class="fs" />
+          <line x1="8" y1="350" x2="552" y2="350" class="sg" stroke-width="3" />
+          <ellipse cx="280" cy="350" rx="76" ry="8" class="fs" style="fill:var(--line)" />
+          <!-- robô -->
+          <g id="robot">
+            <rect x="248" y="300" width="18" height="50" class="fg" />
+            <rect x="294" y="300" width="18" height="50" class="fg" />
+            <line id="armL" x1="220" y1="236" x2="176" y2="272" class="sg lc" stroke-width="12" />
+            <g id="armR" style="transform-origin:340px 236px"><line x1="340" y1="236" x2="388" y2="270" class="sg lc" stroke-width="12" /></g>
+            <rect x="220" y="208" width="120" height="94" class="fr" />
+            <rect x="252" y="234" width="56" height="26" class="fb" />
+            <circle cx="268" cy="247" r="6" class="fg" /><circle cx="292" cy="247" r="6" class="fr" />
+            <line x1="280" y1="64" x2="280" y2="98" class="sg" stroke-width="3" />
+            <g id="glow"><circle cx="280" cy="54" r="10" class="fr t" style="animation:pulse 1.8s ease-out infinite" /></g>
+            <circle id="bulb" cx="280" cy="54" r="10" class="fr t" />
+            <rect x="200" y="98" width="160" height="108" rx="20" class="fb sg" stroke-width="3" />
+            <ellipse class="eye fg t" cx="248" cy="148" rx="11" ry="11" />
+            <ellipse class="eye fg t" cx="312" cy="148" rx="11" ry="11" />
+            <path id="mouth" class="dr nf sr lc" pathLength="1" stroke-width="6" d="M246 178 Q280 202 314 178" />
+          </g>
+          <!-- balão -->
+          <g id="bubble" class="t" style="transform-origin:392px 118px">
+            <path d="M370 26 H536 V92 H416 L392 118 V92 H370 Z" class="fb sg" stroke-width="3" />
+            <text x="453" y="66" text-anchor="middle" font-size="19" class="fg">Vamos brincar?</text>
+          </g>
+          <!-- brinquedos -->
+          <g id="toyBall"><g id="ballSpin" class="t"><circle cx="100" cy="326" r="24" class="fr" /><path d="M100 302 A24 24 0 0 1 124 326 L100 326 Z" class="fg" /></g></g>
+          <g id="toySq"><g id="sqSpin" class="t"><rect x="438" y="306" width="44" height="44" class="fg" /><text x="460" y="338" text-anchor="middle" font-size="22" class="fb">ia</text></g></g>
+          <g id="toyTri"><path d="M130 350 l32 -56 l32 56 z" class="fb sg" stroke-width="3" stroke-linejoin="round" /></g>
+          <g id="vs1" class="t"><path d="M110 120 l0 -26 M97 107 l26 0" class="nf sr lc" stroke-width="4" /></g>
+          <g id="vs2" class="t"><path d="M500 200 l0 -26 M487 187 l26 0" class="nf sg lc" stroke-width="4" /></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · O MERCADO ============ -->
+<section class="scene" id="mercado" data-scene="mercado" data-title="O mercado" style="--h:280vh">
+  <div class="stage">
+    <div class="big" data-par="-120" aria-hidden="true">04</div>
+    <div class="wrap">
+      <div class="copy">
+        <div class="lab rv" style="--i:0">04 · O mercado</div>
+        <h2 class="rv" style="--i:1">Milhões de famílias, e a IA <em>chegando agora</em>.</h2>
+        <p class="rv" style="--i:2">Educação infantil, brinquedos, games, terapia lúdica e edtech somam milhões de famílias brasileiras — todos segmentos que estão levando IA para dentro do produto agora.</p>
+        <p class="note rv" style="--i:3">Ilustração conceitual, sem valores.</p>
+      </div>
+      <div class="art" aria-hidden="true">
+        <div class="chart">
+          <svg viewBox="0 0 500 320">
+            <line x1="0" y1="300" x2="500" y2="300" class="sg" stroke-width="3" />
+            <rect class="bar-s fb sg" x="18" y="230" width="64" height="70" stroke-width="3" vector-effect="non-scaling-stroke" />
+            <rect class="bar-s fb sg" x="118" y="190" width="64" height="110" stroke-width="3" vector-effect="non-scaling-stroke" />
+            <rect class="bar-s fb sg" x="218" y="140" width="64" height="160" stroke-width="3" vector-effect="non-scaling-stroke" />
+            <rect class="bar-s fg" x="318" y="85" width="64" height="215" />
+            <rect class="bar-s fr" x="418" y="30" width="64" height="270" />
+            <polyline id="trend" class="dr nf sr lc" pathLength="1" stroke-width="5" points="50,212 150,172 250,122 350,67 450,12" />
+            <circle id="trendDot" class="fr t" cx="450" cy="12" r="9" />
           </svg>
-          </sc-if>
-          <div style="font-size: 26px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px">02</div>
-          <h3 style="margin: 0 0 10px; font-size: 16px; font-weight: 700">Fechamos valor e forma</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Pix, transferência ou parcelamento combinado. Aceito intermediação por escrow se preferir.</p>
-        </div>
-        <div style="border-top: 1px solid #16130F; padding-top: 22px">
-          <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 90 60" style="width: 90px; height: 60px; display: block; margin-bottom: 16px">
-            <rect x="8" y="14" width="46" height="34" fill="#F2F1EF" stroke="#16130F" stroke-width="3" />
-            <path d="M20 30 h34 l-10 -10 M54 30 l-10 10" fill="none" stroke="#E8351B" stroke-width="4" stroke-linecap="round" />
-            <path d="M66 20 l16 0 M66 30 l16 0 M66 40 l16 0" stroke="#16130F" stroke-width="3" stroke-linecap="round" />
-          </svg>
-          </sc-if>
-          <div style="font-size: 26px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px">03</div>
-          <h3 style="margin: 0 0 10px; font-size: 16px; font-weight: 700">Titularidade no seu nome</h3>
-          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55524E; text-wrap: pretty">Transferência de titularidade pelo Registro.br, normalmente concluída em até 48 horas.</p>
+          <div class="xl"><span>Educação infantil</span><span>Brinque&shy;dos</span><span>Games</span><span>Terapia lúdica</span><span>Edtech</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section style="background: #E8351B; color: #FFFFFF; padding: clamp(48px, 7vw, 104px) clamp(20px, 4vw, 56px); overflow: hidden">
-    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(32px, 5vw, 64px); align-items: center">
-      <div style="min-width: 0">
-        <h2 style="margin: 0 0 24px; font-size: clamp(32px, 4.6vw, 64px); line-height: 1.02; font-weight: 800; letter-spacing: -0.04em; text-wrap: balance">Um domínio. Um dono. Fale agora com Gustavo.</h2>
-        <p style="margin: 0 0 36px; max-width: 42ch; font-size: 16px; line-height: 1.55; color: #FFFFFF">brincar.ia.br está disponível para venda imediata. Propostas e dúvidas pelo WhatsApp (16) 99752-0110.</p>
-        <a href="https://wa.me/5516997520110" style="display: inline-flex; align-items: center; gap: 10px; background: #FFFFFF; color: #E8351B; font-size: 15px; font-weight: 700; padding: 17px 24px" style-hover="background: #16130F; color: #FFFFFF">
-          <svg viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-13 8L3 21l1-5a9 9 0 1 1 17-4z" /></svg>
+<!-- ============ 05 · O ATIVO (escuro) ============ -->
+<section class="scene dark" id="ativo" data-scene="ativo" data-title="O ativo" data-theme="dark" style="--h:280vh">
+  <div class="stage">
+    <div class="big" data-par="-120" aria-hidden="true">05</div>
+    <div class="wrap">
+      <div class="copy">
+        <div class="lab rv" style="--i:0">05 · O ativo</div>
+        <h2 class="rv" style="--i:1">Mídia paga acaba. <em>Um domínio fica.</em></h2>
+        <p class="rv" style="--i:2">Um domínio exato de categoria não deprecia como mídia paga: ele fica no seu balanço, protege sua marca e continua valendo depois da campanha acabar.</p>
+        <div class="chips">
+          <span class="chip" data-in=".5">No balanço</span>
+          <span class="chip" data-in=".6">Protege a marca</span>
+          <span class="chip" data-in=".7">Continua valendo</span>
+        </div>
+      </div>
+      <div class="art" aria-hidden="true">
+        <div class="lines">
+          <span class="flag" id="flag" style="opacity:0">fim da campanha</span>
+          <svg viewBox="0 0 560 360">
+            <line x1="30" y1="320" x2="540" y2="320" class="sg" stroke-width="3" />
+            <line x1="30" y1="30" x2="30" y2="320" class="sg" stroke-width="3" />
+            <line x1="280" y1="30" x2="280" y2="320" class="sg" stroke-width="2" stroke-dasharray="6 8" style="opacity:.5" />
+            <path id="lnA" class="dr nf sg lc" pathLength="1" stroke-width="5" d="M30 310 C90 260 150 130 220 104 L280 104 L336 310 L540 310" />
+            <path id="lnB" class="dr nf sr lc" pathLength="1" stroke-width="7" d="M30 304 C140 296 230 254 320 204 S470 96 540 44" />
+            <circle id="lnDot" class="fr t" cx="540" cy="44" r="10" />
+            <circle id="lnRing" class="nf sr t" cx="540" cy="44" r="10" stroke-width="3" style="animation:pulse 1.8s ease-out infinite;opacity:0" />
+          </svg>
+          <div class="legend">
+            <span><i style="background:var(--fg)"></i>Mídia paga</span>
+            <span><i style="background:var(--red)"></i>brincar.ia.br</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · PARA QUEM (rolagem horizontal) ============ -->
+<section class="scene" id="quem" data-scene="quem" data-title="Para quem" style="--h:400vh">
+  <div class="stage col">
+    <div class="big" data-par="-160" aria-hidden="true" style="right:auto;left:-1vw">06</div>
+    <div class="qhead">
+      <div class="lab rv" style="--i:0">06 · Para quem</div>
+      <h2 class="rv" style="--i:1">Quem deveria ser <em>o dono</em>.</h2>
+      <p class="rv" style="--i:2">Se o seu produto tem criança, jogo ou aprendizado de um lado e IA do outro, este nome resolve seu branding em uma linha.</p>
+    </div>
+    <div class="track" id="track">
+      <article class="qcard">
+        <svg viewBox="0 0 120 90" aria-hidden="true">
+          <path d="M8 24 L58 32 V84 L8 76 Z" class="fb sg lc" stroke-width="3" />
+          <path d="M112 24 L62 32 V84 L112 76 Z" class="fr" />
+          <path d="M60 4 v18 M51 13 h18" class="nf sg lc" stroke-width="3.5" />
+        </svg>
+        <div class="n">01</div><h3>Startups de edtech e tutoria com IA</h3>
+      </article>
+      <article class="qcard">
+        <svg viewBox="0 0 120 90" aria-hidden="true">
+          <line x1="4" y1="84" x2="116" y2="84" class="sg" stroke-width="3" />
+          <rect x="14" y="48" width="36" height="36" class="fr" />
+          <rect x="54" y="48" width="36" height="36" class="fb sg" stroke-width="3" />
+          <rect x="34" y="10" width="36" height="36" class="fg" />
+          <circle cx="102" cy="68" r="14" class="fb sg" stroke-width="3" />
+        </svg>
+        <div class="n">02</div><h3>Fabricantes de brinquedos e brinquedos conectados</h3>
+      </article>
+      <article class="qcard">
+        <svg viewBox="0 0 120 90" aria-hidden="true">
+          <path d="M12 38 L60 10 L108 38 Z" class="fr" />
+          <rect x="22" y="38" width="76" height="46" class="fb sg" stroke-width="3" />
+          <rect x="50" y="56" width="20" height="28" class="fg" />
+          <rect x="30" y="48" width="12" height="12" class="fr" /><rect x="78" y="48" width="12" height="12" class="fr" />
+          <path d="M60 10 V0 h14" class="nf sg lc" stroke-width="3" />
+        </svg>
+        <div class="n">03</div><h3>Escolas, redes de ensino e plataformas de conteúdo infantil</h3>
+      </article>
+      <article class="qcard">
+        <svg viewBox="0 0 120 90" aria-hidden="true">
+          <path d="M18 26 H102 L114 70 H90 L80 56 H40 L30 70 H6 Z" class="fb sg lc" stroke-width="3" />
+          <path d="M34 34 v16 M26 42 h16" class="nf sg lc" stroke-width="3.5" />
+          <circle cx="82" cy="38" r="5" class="fr" /><circle cx="94" cy="46" r="5" class="fg" />
+        </svg>
+        <div class="n">04</div><h3>Estúdios de games e apps para família</h3>
+      </article>
+      <article class="qcard">
+        <svg viewBox="0 0 120 90" aria-hidden="true">
+          <path d="M60 80 C14 52 14 14 40 14 C50 14 57 20 60 28 C63 20 70 14 80 14 C106 14 106 52 60 80 Z" class="fr" />
+          <path d="M6 84 H114" class="nf sg" stroke-width="3" />
+          <path d="M44 40 h12 l5 -10 l7 20 l5 -10 h8" class="nf fb lc" style="stroke:#fff" stroke-width="3.5" />
+        </svg>
+        <div class="n">05</div><h3>Clínicas e projetos de terapia e desenvolvimento lúdico</h3>
+      </article>
+      <article class="qcard">
+        <svg viewBox="0 0 120 90" aria-hidden="true">
+          <ellipse cx="44" cy="76" rx="34" ry="9" class="fb sg" stroke-width="3" />
+          <ellipse cx="44" cy="60" rx="34" ry="9" class="fb sg" stroke-width="3" />
+          <ellipse cx="44" cy="44" rx="34" ry="9" class="fr" />
+          <path d="M70 34 L96 12 M80 10 H98 V28" class="nf sg lc" stroke-width="4" />
+        </svg>
+        <div class="n">06</div><h3>Investidores de domínios buscando .ia.br premium</h3>
+      </article>
+    </div>
+    <div class="qprog"><i id="qbar"></i></div>
+  </div>
+</section>
+
+<!-- ============ 07 · COMO COMPRAR ============ -->
+<section class="scene" id="comprar" data-scene="comprar" data-title="Como comprar" style="--h:270vh">
+  <div class="stage buy">
+    <div class="big" data-par="-120" aria-hidden="true">07</div>
+    <div class="head">
+      <div class="lab rv" style="--i:0">07 · Como comprar</div>
+      <h2 class="rv" style="--i:1">Três passos até <em>ser seu</em>.</h2>
+    </div>
+    <div class="steps" id="steps">
+      <div class="rail" aria-hidden="true"><i class="fill"></i><b class="trav"></b></div>
+      <div class="step">
+        <svg viewBox="0 0 90 60" aria-hidden="true">
+          <path d="M6 8 h58 v34 h-34 l-12 12 v-12 h-12 z" class="fr" />
+          <circle cx="28" cy="25" r="4" class="fb" /><circle cx="42" cy="25" r="4" class="fb" /><circle cx="56" cy="25" r="4" class="fb" />
+        </svg>
+        <div class="n">01</div>
+        <h3>Você chama no WhatsApp</h3>
+        <p>Diga para que pretende usar o nome e faça sua proposta. Falo direto com você, sem intermediário.</p>
+      </div>
+      <div class="step">
+        <svg viewBox="0 0 90 60" aria-hidden="true">
+          <circle cx="28" cy="30" r="20" class="fb sg" stroke-width="3" />
+          <circle cx="58" cy="30" r="20" class="fr" />
+          <path d="M22 30 h12 M28 24 v12" class="nf sg lc" stroke-width="3" />
+        </svg>
+        <div class="n">02</div>
+        <h3>Fechamos valor e forma</h3>
+        <p>Pix, transferência ou parcelamento combinado. Aceito intermediação por escrow se preferir.</p>
+      </div>
+      <div class="step">
+        <svg viewBox="0 0 90 60" aria-hidden="true">
+          <rect x="8" y="14" width="46" height="34" class="fb sg" stroke-width="3" />
+          <path d="M20 30 h34 l-10 -10 M54 30 l-10 10" class="nf sr lc" stroke-width="4" />
+          <path d="M66 20 l16 0 M66 30 l16 0 M66 40 l16 0" class="nf sg lc" stroke-width="3" />
+        </svg>
+        <div class="n">03</div>
+        <h3>Titularidade no seu nome</h3>
+        <p>Transferência de titularidade pelo Registro.br, normalmente concluída em até 48 horas.</p>
+      </div>
+    </div>
+    <div class="seal" data-in=".82">
+      <svg viewBox="0 0 90 70" aria-hidden="true">
+        <path d="M45 6 l28 10 v22 c0 16 -14 24 -28 28 c-14 -4 -28 -12 -28 -28 v-22 z" class="fb sg" stroke-width="3" />
+        <path d="M32 36 l10 10 18 -20" class="nf sr lc" stroke-width="5" />
+      </svg>
+      <div><b>48h</b></div>
+      <p>Registro brasileiro, transferência direta de titularidade no Registro.br. Sem intermediário estrangeiro, sem burocracia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 · FINAL ============ -->
+<section class="scene" id="contato" data-scene="cta" data-title="Contato" style="--h:240vh">
+  <div class="stage">
+    <div class="wipe" id="wipe"></div>
+    <div class="wrap cta">
+      <div class="copy">
+        <h2 data-in=".36">Um domínio. Um dono. Fale agora com Gustavo.</h2>
+        <p data-in=".46">brincar.ia.br está disponível para venda imediata. Propostas e dúvidas pelo WhatsApp (16) 99752-0110.</p>
+        <a class="btn white" data-in=".56" href="https://wa.me/5516997520110">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-13 8L3 21l1-5a9 9 0 1 1 17-4z" /></svg>
           Enviar mensagem no WhatsApp
         </a>
       </div>
-      <sc-if value="{{ showIllustrations }}" hint-placeholder-val="{{ true }}">
-      <div style="min-width: 0">
-        <svg viewBox="0 0 420 300" style="width: 100%; height: auto; display: block">
-          <path d="M40 250 A110 110 0 0 1 260 250" fill="none" stroke="#FFFFFF" stroke-width="14" />
-          <path d="M84 250 A66 66 0 0 1 216 250" fill="none" stroke="#16130F" stroke-width="14" />
-          <line x1="10" y1="250" x2="410" y2="250" stroke="#FFFFFF" stroke-width="3" />
-          <rect x="278" y="186" width="64" height="64" fill="#FFFFFF" />
-          <rect x="278" y="118" width="64" height="64" fill="none" stroke="#FFFFFF" stroke-width="3" />
-          <rect x="346" y="186" width="64" height="64" fill="#16130F" />
-          <circle cx="310" cy="72" r="22" fill="#16130F" />
-          <path d="M150 120 l0 -30 M135 105 l30 0" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
-          <circle cx="60" cy="96" r="8" fill="#FFFFFF" />
-          <path d="M108 60 l0 -24 M96 48 l24 0" stroke="#16130F" stroke-width="4" stroke-linecap="round" />
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 420 300">
+          <path id="c1" class="dr nf sw" pathLength="1" stroke-width="14" d="M40 250 A110 110 0 0 1 260 250" />
+          <path id="c2" class="dr nf sg" pathLength="1" stroke-width="14" d="M84 250 A66 66 0 0 1 216 250" style="stroke:#16130F" />
+          <line x1="10" y1="250" x2="410" y2="250" class="sw" stroke-width="3" />
+          <rect class="cp t fw" x="278" y="186" width="64" height="64" />
+          <rect class="cp t nf sw" x="278" y="118" width="64" height="64" stroke-width="3" />
+          <rect class="cp t" x="346" y="186" width="64" height="64" style="fill:#16130F" />
+          <circle class="cp t" cx="310" cy="72" r="22" style="fill:#16130F" />
+          <g class="cp t"><path d="M150 120 l0 -30 M135 105 l30 0" class="nf sw lc" stroke-width="4" /></g>
+          <circle class="cp t fw" cx="60" cy="96" r="8" />
+          <g class="cp t"><path d="M108 60 l0 -24 M96 48 l24 0" class="nf lc" style="stroke:#16130F" stroke-width="4" /></g>
         </svg>
       </div>
-      </sc-if>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 22px clamp(20px, 4vw, 56px); font-size: 12px; color: #6B6864">
-    <span>brincar.ia.br — venda direta pelo titular</span>
-    <span>Gustavo · (16) 99752-0110</span>
-  </footer>
+</main>
 
-  <sc-if value="{{ stickyCta }}" hint-placeholder-val="{{ false }}">
-  <a href="https://wa.me/5516997520110" style="position: fixed; right: 20px; bottom: 20px; z-index: 40; display: inline-flex; align-items: center; gap: 9px; background: #E8351B; color: #FFFFFF; font-size: 14px; font-weight: 700; padding: 14px 18px; box-shadow: 0 10px 28px rgba(22,19,15,0.22)" style-hover="background: #16130F; color: #FFFFFF">
-    <svg viewBox="0 0 24 24" style="width: 17px; height: 17px" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-13 8L3 21l1-5a9 9 0 1 1 17-4z" /></svg>
-    WhatsApp
-  </a>
-  </sc-if>
-</div>
+<footer>
+  <span>brincar.ia.br — venda direta pelo titular</span>
+  <span>Gustavo · (16) 99752-0110</span>
+</footer>
 
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showIllustrations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;stickyCta&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;}}">
-class Component extends DCLogic {
-  renderVals() {
-    return {
-      showIllustrations: this.props.showIllustrations ?? true,
-      stickyCta: this.props.stickyCta ?? false,
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+
+  if (reduce) root.classList.add("reduce");
+
+  /* ---------- utilitários de easing ---------- */
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const eo = (t) => 1 - (1 - t) ** 3;
+  const eio = (t) => (t < .5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+  const back = (t) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * (t - 1) ** 3 + c1 * (t - 1) ** 2; };
+  const bounce = (t) => { const n = 7.5625, d = 2.75; if (t < 1 / d) return n * t * t; if (t < 2 / d) return n * (t -= 1.5 / d) * t + .75; if (t < 2.5 / d) return n * (t -= 2.25 / d) * t + .9375; return n * (t -= 2.625 / d) * t + .984375; };
+  const draw = (el, t) => { el.style.strokeDashoffset = 1 - t; el.style.opacity = t > 0 ? 1 : 0; };
+  const tf = (el, s) => { el.style.transform = s; };
+
+  /* ---------- cenas: cada função recebe o progresso 0..1 da rolagem ---------- */
+  const U = {};
+
+  // 00 · abertura
+  {
+    const text = $("#heroText"), art = $("#heroArt"), cue = $("#cue");
+    U.hero = (p) => {
+      const t = eio(seg(p, .08, .85));
+      text.style.opacity = 1 - seg(p, .22, .62);
+      tf(text, `translateY(${-t * 110}px)`);
+      art.style.opacity = 1 - seg(p, .5, .95);
+      art.style.translate = `0 ${-t * 50}px`;
+      art.style.scale = 1 + t * .4;
+      cue.style.opacity = 1 - seg(p, 0, .1);
     };
   }
-}
-</script>
 
-<script type="module">
-import { animate, inView, stagger, scroll, hover } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
-
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-function ready(fn) {
-  const t = setInterval(() => {
-    if (document.querySelector("#dc-root h1")) { clearInterval(t); fn(document.getElementById("dc-root")); }
-  }, 50);
-  setTimeout(() => clearInterval(t), 10000);
-}
-
-ready((root) => {
-  if (reduce) return;
-  const $ = (s, c = root) => [...c.querySelectorAll(s)];
-  const sections = $("section");
-  const hero = sections[0];
-
-  // Header
-  animate($("header")[0], { opacity: [0, 1], y: [-16, 0] }, { duration: 0.6, ease: "easeOut" });
-
-  // Hero: tags, título, texto, botões
-  const heroText = hero.firstElementChild.firstElementChild;
-  const items = [...heroText.children];
-  items.forEach((el) => (el.style.opacity = 0));
-  animate(items, { opacity: [0, 1], y: [28, 0] }, { delay: stagger(0.1, { startDelay: 0.2 }), duration: 0.7, ease: [0.22, 1, 0.36, 1] });
-
-  // Ilustração do hero: entrada com mola + blocos caindo
-  const art = hero.querySelector("svg");
-  if (art) {
-    animate(art, { opacity: [0, 1], scale: [0.92, 1] }, { delay: 0.3, type: "spring", stiffness: 120, damping: 16 });
-    animate($("rect", art), { y: [-40, 0], opacity: [0, 1] }, { delay: stagger(0.12, { startDelay: 0.7 }), type: "spring", stiffness: 260, damping: 14 });
-    animate($("path[stroke-width='15']", art), { opacity: [0, 1] }, { delay: stagger(0.2, { startDelay: 0.5 }), duration: 0.6 });
+  // 01 · blocos formam a palavra
+  {
+    const blocks = $$("#blocks .blk"), dim = $("#dim"), dimTxt = $("#dimTxt");
+    const sp = [$("#sp1"), $("#sp2"), $("#sp3")];
+    U.palavra = (p) => {
+      blocks.forEach((g, i) => {
+        const a = .05 + i * .085, t = seg(p, a, a + .17);
+        const y = -(1 - bounce(t)) * 340, r = (1 - eo(t)) * (i % 2 ? -28 : 28);
+        g.style.opacity = clamp(t * 6);
+        tf(g, `translateY(${y}px) rotate(${r}deg)`);
+      });
+      draw(dim, eio(seg(p, .72, .88)));
+      dimTxt.style.opacity = seg(p, .84, .94);
+      sp.forEach((el, i) => { const t = back(seg(p, .78 + i * .05, .9 + i * .05)); tf(el, `scale(${t}) rotate(${(1 - t) * -90}deg)`); });
+    };
   }
 
-  // Revelar ao entrar e sumir ao sair da tela (vale na descida e na subida)
-  const EASE = [0.22, 1, 0.36, 1];
-  const reveal = (targets, { amount = 0.25, distance = 40, gap = 0.08, extra, host: hostEl } = {}) => {
-    const els = [].concat(targets);
-    els.forEach((el) => { el.style.opacity = 0; });
-    const host = hostEl ?? els[0];
-    inView(host, () => {
-      animate(els, { opacity: 1, y: 0 }, { delay: stagger(gap), duration: 0.7, ease: EASE });
-      extra?.in?.();
-      return () => {
-        const above = host.getBoundingClientRect().top < 0;
-        animate(els, { opacity: 0, y: above ? -distance : distance }, { duration: 0.45, ease: "easeIn" });
-        extra?.out?.();
-      };
-    }, { amount });
-    els.forEach((el) => animate(el, { y: distance }, { duration: 0 }));
-  };
-
-  // Faixa de números
-  const stats = sections[1];
-  const statCells = $(":scope > div", stats);
-  const n = $(":scope > div > div:first-child", stats)[0];
-  const nTarget = n && /^\d+$/.test(n.textContent.trim()) ? +n.textContent : null;
-  reveal(statCells, {
-    amount: 0.5, gap: 0.1, distance: 28, host: stats,
-    extra: { in: () => nTarget !== null && animate(0, nTarget, { duration: 1.2, ease: "easeOut", onUpdate: (v) => (n.textContent = Math.round(v)) }) },
-  });
-
-  // Seções de argumentos e demais
-  sections.slice(2, -1).forEach((sec) => {
-    const head = $(":scope > div > div:not([style*='display: grid']), :scope > div > h2", sec);
-    if (head.length) reveal(head, { amount: 0.3, distance: 30 });
-
-    $("div[style*='border-top']", sec).forEach((card) => {
-      const svg = card.querySelector("svg");
-      reveal(card, {
-        amount: 0.3, distance: 50,
-        extra: { in: () => svg && animate(svg, { scale: [0.6, 1], rotate: [-8, 0] }, { delay: 0.15, type: "spring", stiffness: 220, damping: 12 }) },
-      });
-      hover(card, () => {
-        animate(card, { y: -6 }, { type: "spring", stiffness: 300, damping: 20 });
-        return () => animate(card, { y: 0 }, { type: "spring", stiffness: 300, damping: 20 });
-      });
-    });
-  });
-
-  // Seção CTA vermelha
-  const cta = sections[sections.length - 1];
-  const ctaSvg = cta && [...cta.querySelectorAll("svg")].pop();
-  const ctaText = cta?.querySelector("h2")?.parentElement;
-  if (ctaText) reveal([...ctaText.children], { amount: 0.3, distance: 30 });
-  if (ctaSvg) {
-    ctaSvg.style.opacity = 0;
-    inView(cta, () => {
-      animate(ctaSvg, { opacity: 1, x: 0 }, { duration: 0.8, ease: EASE });
-      animate($("rect, circle", ctaSvg), { scale: [0.6, 1] }, { delay: stagger(0.08, { startDelay: 0.3 }), type: "spring", stiffness: 260, damping: 14 });
-      return () => animate(ctaSvg, { opacity: 0, x: 60 }, { duration: 0.45, ease: "easeIn" });
-    }, { amount: 0.3 });
-    animate(ctaSvg, { x: 60 }, { duration: 0 });
+  // 02 · digitando o endereço
+  {
+    const typed = $("#typed"), tldEl = $("#tldEl"), url = $("#url"), page = $("#page"), st = $("#sticker");
+    U.extensao = (p) => {
+      const w = "brincar", d = ".ia.br";
+      const a = Math.round(seg(p, .05, .38) * w.length), b = Math.round(seg(p, .42, .6) * d.length);
+      typed.textContent = w.slice(0, a);
+      tldEl.textContent = d.slice(0, b);
+      url.classList.toggle("done", b === d.length);
+      const t = eo(seg(p, .6, .78));
+      page.style.opacity = t;
+      tf(page, `translateY(${(1 - t) * 20}px) scale(${.96 + t * .04})`);
+      const s = back(seg(p, .78, .94));
+      tf(st, `scale(${s}) rotate(${-14 + (1 - s) * -60}deg)`);
+      st.style.opacity = seg(p, .78, .82);
+    };
   }
 
-  // Hero: ao rolar para baixo o texto e a ilustração se afastam e esmaecem
-  scroll(animate(heroText, { opacity: [1, 0], y: [0, -60] }, { ease: "linear" }), { target: hero, offset: ["35% start", "end start"] });
+  // 03 · o robô acorda e convida
+  {
+    const eyes = $$(".eye"), mouth = $("#mouth"), armR = $("#armR"), bubble = $("#bubble"), bulb = $("#bulb"), glow = $("#glow");
+    const ball = $("#toyBall"), ballSpin = $("#ballSpin"), sq = $("#toySq"), sqSpin = $("#sqSpin"), tri = $("#toyTri");
+    const s1 = $("#vs1"), s2 = $("#vs2");
+    U.verbo = (p) => {
+      bulb.style.opacity = .35 + .65 * seg(p, .02, .08);
+      glow.style.opacity = seg(p, .06, .12);
+      const eye = .08 + .92 * eo(seg(p, .1, .26));
+      eyes.forEach((e) => tf(e, `scaleY(${eye})`));
+      draw(mouth, eo(seg(p, .26, .4)));
+      const wave = seg(p, .4, .5) * Math.sin(p * 70) * 14;
+      tf(armR, `rotate(${-52 * eo(seg(p, .34, .5)) + wave}deg)`);
+      const b = back(seg(p, .42, .56));
+      tf(bubble, `scale(${b})`); bubble.style.opacity = seg(p, .42, .46);
 
-  // Botões: mola ao passar o mouse / clicar
-  $("a[href^='https://wa.me']").forEach((a) => {
-    a.style.display = a.style.display || "inline-block";
-    hover(a, () => {
-      animate(a, { scale: 1.05 }, { type: "spring", stiffness: 400, damping: 18 });
-      return () => animate(a, { scale: 1 }, { type: "spring", stiffness: 400, damping: 18 });
-    });
+      const tb = eo(seg(p, .52, .8));
+      const hop = seg(p, .8, 1) * Math.abs(Math.sin(seg(p, .8, 1) * Math.PI * 3)) * -46;
+      tf(ball, `translate(${(1 - tb) * -300}px, ${hop}px)`);
+      tf(ballSpin, `rotate(${(1 - tb) * -520}deg)`);
+      const ts = eo(seg(p, .58, .84));
+      tf(sq, `translateX(${(1 - ts) * 300}px)`);
+      tf(sqSpin, `rotate(${(1 - ts) * 360}deg)`);
+      const tt = seg(p, .64, .9);
+      tf(tri, `translateY(${-(1 - bounce(tt)) * 340}px)`); tri.style.opacity = clamp(tt * 6);
+      tf(s1, `scale(${back(seg(p, .86, .97))})`); tf(s2, `scale(${back(seg(p, .9, 1))})`);
+    };
+  }
+
+  // 04 · barras crescem e a linha de tendência sobe
+  {
+    const bars = $$(".bar-s"), labels = $$(".xl span"), trend = $("#trend"), dot = $("#trendDot");
+    U.mercado = (p) => {
+      bars.forEach((b, i) => {
+        const a = .06 + i * .12, t = seg(p, a, a + .2);
+        tf(b, `scaleY(${eo(t)})`);
+        if (labels[i]) { labels[i].style.opacity = seg(p, a + .08, a + .22); }
+      });
+      draw(trend, eio(seg(p, .6, .9)));
+      tf(dot, `scale(${back(seg(p, .88, .98))})`);
+    };
+  }
+
+  // 05 · mídia paga cai, domínio continua
+  {
+    const A = $("#lnA"), B = $("#lnB"), flag = $("#flag"), dot = $("#lnDot"), ring = $("#lnRing");
+    U.ativo = (p) => {
+      draw(A, seg(p, .06, .46));
+      flag.style.opacity = seg(p, .3, .4);
+      draw(B, eio(seg(p, .28, .86)));
+      tf(dot, `scale(${back(seg(p, .86, .96))})`);
+      ring.style.opacity = p > .9 ? 1 : 0;
+    };
+  }
+
+  // 06 · cartões de público, rolagem horizontal
+  {
+    const section = $("#quem"), track = $("#track"), cards = $$(".qcard"), qbar = $("#qbar");
+    let dist = 0;
+    const measure = () => {
+      dist = Math.max(0, track.scrollWidth - innerWidth);
+      if (!reduce) section.style.setProperty("--h", Math.max(innerHeight * 2.4, innerHeight + dist * 1.1) + "px");
+    };
+    measure();
+    addEventListener("resize", () => { measure(); frame(true); });
+    addEventListener("load", () => { measure(); frame(true); });
+    U.quem = (p) => {
+      const t = seg(p, .04, .96);
+      tf(track, `translateX(${-dist * t}px)`);
+      qbar.style.transform = `scaleX(${t})`;
+      const mid = innerWidth / 2;
+      cards.forEach((c) => {
+        const r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid) / (innerWidth * .6);
+        const f = 1 - clamp(d);
+        c.style.opacity = .45 + .55 * eo(f);
+        c.firstElementChild.style.transform = `scale(${.85 + .25 * eo(f)})`;
+      });
+    };
+  }
+
+  // 07 · caminho com três passos
+  {
+    const steps = $$(".step"), wrap = $("#steps");
+    U.comprar = (p) => {
+      const rp = seg(p, .08, .78);
+      wrap.style.setProperty("--rp", rp.toFixed(4));
+      steps.forEach((s, i) => s.classList.toggle("on", rp >= i * .5 - .02 && p > .04));
+    };
+  }
+
+  // 08 · fundo vermelho se espalha, blocos montam
+  {
+    const wipe = $("#wipe"), c1 = $("#c1"), c2 = $("#c2"), parts = $$(".cp");
+    U.cta = (p) => {
+      wipe.style.clipPath = `circle(${eio(seg(p, 0, .42)) * 150}% at 50% 100%)`;
+      draw(c1, eio(seg(p, .4, .7)));
+      draw(c2, eio(seg(p, .5, .78)));
+      parts.forEach((el, i) => { const a = .48 + i * .06; tf(el, `scale(${back(seg(p, a, a + .18))})`); });
+    };
+  }
+
+  /* ---------- motor: um único listener de scroll ---------- */
+  const scenes = $$(".scene").map((el) => ({
+    el, stage: $(".stage", el), fn: U[el.dataset.scene], last: -1,
+    ins: $$("[data-in]", el).map((n) => ({ n, a: +n.dataset.in })),
+    par: $$("[data-par]", el).map((n) => ({ n, k: +n.dataset.par })),
+  }));
+
+  const dots = $("#dots");
+  scenes.forEach((s) => {
+    const a = document.createElement("a");
+    a.href = "#" + s.el.id; a.setAttribute("aria-label", s.el.dataset.title);
+    a.innerHTML = `<span>${s.el.dataset.title}</span>`;
+    dots.appendChild(a); s.dot = a;
   });
+  const bar = $("#bar");
 
-  // Parallax suave na ilustração do hero
-  if (art) scroll(animate(art, { y: [0, -50] }, { ease: "linear" }), { target: hero, offset: ["start start", "end start"] });
+  function frame(force) {
+    const vh = innerHeight;
+    let active = null;
+    for (const s of scenes) {
+      const r = s.el.getBoundingClientRect();
+      if (r.top < vh * .5 && r.bottom > vh * .5) active = s;
+      const total = r.height - s.stage.offsetHeight;
+      const p = total > 0 ? clamp(-r.top / total) : 0;
+      s.p = p;
+      if (!force && Math.abs(p - s.last) < 1e-4) continue;
+      s.last = p;
+      s.fn && s.fn(p);
+      for (const { n, a } of s.ins) {
+        const t = seg(p, a, a + .07);
+        n.style.opacity = t;
+        n.style.transform = t < 1 ? `translateY(${(1 - eo(t)) * 18}px)` : "";
+      }
+      for (const { n, k } of s.par) n.style.transform = `translateY(${p * k}px)`;
+    }
+    scenes.forEach((s) => s.dot.classList.toggle("on", s === active));
+    const dark = active && (active.el.dataset.theme === "dark" || (active.el.dataset.scene === "cta" && active.p > .3));
+    dark ? dots.setAttribute("data-dark", "") : dots.removeAttribute("data-dark");
+    const doc = root.scrollHeight - vh;
+    bar.style.transform = `scaleX(${doc > 0 ? clamp(scrollY / doc) : 0})`;
+  }
 
-  // Barra de progresso de leitura
-  const bar = document.createElement("div");
-  bar.style.cssText = "position:fixed;top:0;left:0;right:0;height:3px;background:#E8351B;transform-origin:0 50%;transform:scaleX(0);z-index:100;pointer-events:none";
-  document.body.appendChild(bar);
-  scroll(animate(bar, { scaleX: [0, 1] }, { ease: "linear" }));
-});
+  if (reduce) {
+    scenes.forEach((s) => { s.fn && s.fn(1); s.ins.forEach(({ n }) => { n.style.opacity = 1; }); s.el.classList.add("live"); });
+    bar.style.display = "none";
+    return;
+  }
+
+  // revelar textos quando a cena entra na tela (e esconder ao sair)
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.target.parentElement.classList.toggle("live", e.isIntersecting)), { threshold: .25 });
+  scenes.forEach((s) => io.observe(s.stage));
+
+  let queued = false;
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; frame(); }); } }, { passive: true });
+  addEventListener("resize", () => frame(true));
+  frame(true);
+})();
 </script>
 </body>
 </html>
